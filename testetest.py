@@ -1,23 +1,27 @@
 import json
+import requests
 
 
-# with open("spells.json", "r", encoding="utf-8") as json_file:
-#     data = json.load(json_file)
+response = requests.get("api.open5e.com/spells/?dnd_class=Wizard")
 
-def findSpell():
-    searchedSpell = input("Which spell do you want to find? \n")
-    spellName = searchedSpell.lower()
-    spellName = spellName.title()
-
-    if spellName in data.keys():
-        return data[spellName]
-
-    else:
-        spellName = searchedSpell.replace(" ","")
-        spellName = spellName.lower()
-        spellName = spellName.title()
-        if spellName in data.keys():
-            return data[spellName]
+print(response)
 
 
-print(findSpell())
+
+# def findSpell():
+#     searchedSpell = input("Which spell do you want to find? \n")
+#     spellName = searchedSpell.lower()
+#     spellName = spellName.title()
+
+#     if spellName in data.keys():
+#         return data[spellName]
+
+#     else:
+#         spellName = searchedSpell.replace(" ","")
+#         spellName = spellName.lower()
+#         spellName = spellName.title()
+#         if spellName in data.keys():
+#             return data[spellName]
+
+
+# print(findSpell())
