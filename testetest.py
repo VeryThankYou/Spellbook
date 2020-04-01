@@ -3,6 +3,14 @@ import requests
 
 def tranScribe(spelStuff):
     for e in spelStuff:
+        if e == "slug":
+            continue
+        elif  e == "document__slug":
+            continue
+        elif  e == "document__title":
+            continue
+        elif  e == "document__license_url":
+            continue
         print(e, end = "")
         mRum = 24 - len(e)
         for i in range(mRum):
