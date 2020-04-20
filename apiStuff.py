@@ -18,8 +18,13 @@ def tranScribe(spelStuff):
         print(":    ", end = "")
         print(spelStuff.get(e).capitalize().replace("<br/>",", "))
  
-def findSpell():
-    searchThis = input("Hvilken besværgelse vil du gerne finde?\n")
+def findSpell(preDef = "***"):
+    
+    if preDef == "***":
+        searchThis = input("Hvilken besværgelse vil du gerne finde?\n")
+    else:
+        searchThis = preDef
+
     response = requests.get("https://api.open5e.com/spells/?search="+searchThis)
 
     if response.status_code == 200:
