@@ -103,13 +103,28 @@ def setSpellSlot(i):
             json.dump(data, f)
             f.close()
 
+def updateSpellSlots():
+    with open('slotdata.json', 'r', encoding="utf-8") as f:
+        wizdict = json.load(f)
+        f.close()
+    lvl = data[0]['lvl']
+    tal = 1
+    for e in wizdict[0][str(lvl)]:
+        data[0]['maxss'][str(tal)] = wizdict[0][str(lvl)][e]
+        tal += 1
+    with open('data.json', 'w', encoding="utf-8") as f:
+        json.dump(data, f)
+        f.close()
+
+     
 
 #prepSpell("Fireball")
 #learnSpell("acid Arrow")
 #learnSpell("eldri")
 #lvlup()
-#setlvl(2)
+setlvl(13)
 #longRest()
 #useSpell(1)
 #addSpellSlot(3)
 #setSpellSlot(3)
+updateSpellSlots()
