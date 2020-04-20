@@ -1,8 +1,10 @@
 import json, requests
 
-with open('data.json', 'r', encoding="utf-8") as f:
-    data = json.load(f)
-    f.close()
+def updateData():
+    with open('data.json', 'r', encoding="utf-8") as f:
+        data = json.load(f)
+        f.close()
+    return data
 
 def prepSpell(string):
     response = requests.get("https://api.open5e.com/spells/?search="+str(string))
@@ -117,12 +119,12 @@ def updateSpellSlots():
         f.close()
 
      
-
+data = updateData()
 #prepSpell("Fireball")
 #learnSpell("acid Arrow")
 #learnSpell("eldri")
 #lvlup()
-setlvl(13)
+setlvl(1)
 #longRest()
 #useSpell(1)
 #addSpellSlot(3)
