@@ -90,13 +90,26 @@ def useSpell(i):
             json.dump(data, f)
             f.close()    
 
+def addSpellSlot(i):
+    data[0]['maxss'][str(i)] += 1
+    with open('data.json', 'w', encoding="utf-8") as f:
+            json.dump(data, f)
+            f.close()
+
+def setSpellSlot(i):
+    numslot = input("How many spell slots of this level do you have?\n")
+    data[0]['maxss'][str(i)] = int(numslot)
+    with open('data.json', 'w', encoding="utf-8") as f:
+            json.dump(data, f)
+            f.close()
+
+
 #prepSpell("Fireball")
 #learnSpell("acid Arrow")
-
 #learnSpell("eldri")
-
 #lvlup()
 #setlvl(2)
 #longRest()
-
-useSpell(1)
+#useSpell(1)
+#addSpellSlot(3)
+#setSpellSlot(3)
