@@ -1,9 +1,13 @@
 import json, requests
+#Her importeres de biblioteker der bruges
 
 def updateData():
+    #Her defineres funktionen updateData som henter brugerens data fra den tilhørende json-fil og returnere den
     with open('data.json', 'r', encoding="utf-8") as f:
+        #Først åbnes filen til læsning (grundet 'r'), som f
         data = json.load(f)
         f.close()
+        #Nu gemmes indholdet i variablen data, og filen lukkes
     return data
 
 def prepSpell(string):
