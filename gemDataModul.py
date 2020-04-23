@@ -11,7 +11,7 @@ def updateData():
     return data
 
 def prepSpell(string):
-    #Her defineres funktionen prepSpell, som tilføjer 
+    #Her defineres funktionen prepSpell, som tilføjer
     response = requests.get("https://api.open5e.com/spells/?search="+str(string))
     response = response.json()
     if len(response['results']) > 1:
@@ -95,7 +95,7 @@ def useSpell(i):
         data[charnumber]['usedss'][str(i)] = data[charnumber]['usedss'][str(i)] + 1
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
-            f.close()    
+            f.close()
 
 def addSpellSlot(i):
     data[charnumber]['maxss'][str(i)] += 1
@@ -132,10 +132,10 @@ def addChar(name):
     with open('data.json', 'w', encoding="utf-8") as f:
         json.dump(data, f)
         f.close()
-    
 
 
-     
+
+
 data = updateData()
 charnumber = 1
 #prepSpell("Fireball")
