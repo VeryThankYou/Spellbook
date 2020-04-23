@@ -7,8 +7,8 @@ def tranScribe(spelStuff):
             continue
 
         elif e == "desc":
-            print("Description", end = "")    
-            print("     :    ", end = "")    
+            print("Description", end = "")
+            print("     :    ", end = "")
             print(". ".join(i.capitalize() for i in spelStuff.get(e).split(". ")))
 
         print(e.capitalize().replace("_", " "), end = "")
@@ -17,9 +17,9 @@ def tranScribe(spelStuff):
             print(" ", end = "")
         print(":    ", end = "")
         print(spelStuff.get(e).capitalize().replace("<br/>",", "))
- 
+
 def findSpell(preDef = "***"):
-    
+
     if preDef == "***":
         searchThis = input("Hvilken besværgelse vil du gerne finde?\n")
     else:
@@ -53,7 +53,5 @@ def findSpell(preDef = "***"):
         else:
             print("2 manyy spelzz braj, be spesifig, dyd\n")
     else:
-        print("OOPSIE WOOPSE!! Uwu You made a fuckie wuckie!! A wittle fucko boingo! The code monkeys at our headquarteres are working VEWY HAWD to fix this! JK do it yourself")
+        print("OOPSIE WOOPSE!! Uwu You made a fuckie wuckie!! A wittle fucko boingo! The code monkeys at our headquarteres are working VEWY HAWD to fix this! JK do it yourself, lol")
         print(response.status_code)
-
-findSpell()
