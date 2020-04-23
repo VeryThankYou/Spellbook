@@ -10,31 +10,39 @@ def updateData():
         #Nu gemmes indholdet i variablen data, og filen lukkes
     return data
 
-def prepSpell(string):
-    #Her defineres funktionen prepSpell, som tilføjer 
-    response = requests.get("https://api.open5e.com/spells/?search="+str(string))
-    response = response.json()
-    if len(response['results']) > 1:
-        n = 1
-        for e in response['results']:
-            print(str(n)+" - "+str(e['name']))
-            n += 1
-        print("What spell did you mean?")
-        inp = int(input("Choose spell by index number\n"))
-        spellname = response['results'][inp-1]['name']
-    else:
-        spellname = response['results'][0]['name']
-    known = 0
-    for e in data[0]['prep']:
-        if e == spellname:
-            known += 1
-    if known > 0:
-        print("You have prepared this spell already.")
-    else:
-        data[charnumber]['prep'].append(str(spellname))
-        with open('data.json', 'w', encoding="utf-8") as f:
-            json.dump(data, f)
-            f.close()
+def prepSpell():
+    #Her defineres funktionen prepSpell, som tilføjer en spell til listen over prepared spells
+    for e in data[charnumber]['know']:
+        print(str(data[charnumber]['know'].index(e) + 1) + " - " + str(e) + "\n")
+        #Først printes navnet på alle spells karakteren kender
+    indx = int(input("Write the index number of the spell you want to prepare\n"))
+    #Brugeren vælger den spell der skal prepareres
+    try:
+        spell = data[charnumber]['know'][indx-1]
+        #Her gemmes navnet på den valgte spell. Dette gøres i en try-løkke så brugeren kan indtaste et forkert index uden at ødelægge programmet
+        count = 0
+        #Her oprettes en variabel der holder styr på om man har en spell med samme navn prepareret i forvejen
+        for e in data[charnumber]['prep']:
+            if e == spell:
+                #For hvert element i listen over preparerede spells tjekkes om navnet er lig den valgte spell
+                print("You have already prepared this spell")
+                count += 1
+                #I det tilfælde får brugeren at vide at de allerede har prepareret spellen, og der lægges 1 til count
+        if count == 0:
+            data[charnumber]['prep'].append(str(spell))
+            #Hvis count stadig er lig 0, tilføjes den valgte spell til listen over preparerede spells i dataen
+            with open('data.json', 'w', encoding="utf-8") as f:
+                json.dump(data, f)
+                f.close()
+                #her gemmes dataen i data.json
+            print(str(spell) + " has succesfully been prepared\n") 
+            
+    except:
+        answer = input("Invalid index number. Would you like to try again? (y/n)")
+        if answer == "y":
+            prepSpell()
+        pass
+    
 
 
 
@@ -133,18 +141,35 @@ def addChar(name):
         json.dump(data, f)
         f.close()
     
-
+def unprepSpell():
+    for e in data[charnumber]['prep']:
+        print(str(data[charnumber]['prep'].index(e) + 1) + " - " + str(e) + "\n")
+    indx = int(input("Write the index number of the spell you want to remove from your prepared list\n"))
+    try:
+        del data[charnumber]['prep'][indx-1]
+        with open('data.json', 'w', encoding="utf-8") as f:
+            json.dump(data, f)
+            f.close()
+    except:
+        answer = input("Invalid index number. Would you like to try again? (y/n)")
+        if answer == "y":
+            unprepSpell()
+        else:
+            pass
+    
 
      
 data = updateData()
-charnumber = 1
+charnumber = 0
 #prepSpell("Fireball")
 #learnSpell("acid Arrow")
 #learnSpell("eldri")
 #lvlup()
-setlvl(13)
+#setlvl(13)
 #longRest()
 #useSpell(1)
 #addSpellSlot(3)
 #setSpellSlot(3)
-updateSpellSlots()
+#updateSpellSlots()
+learnSpell("delayed blast fire")
+prepSpell()
