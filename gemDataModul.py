@@ -110,17 +110,19 @@ def useSpell(i):
             f.close()    
 
 def addSpellSlot():
-    i = int(input("What level spellslot do you want to add?\n"))
     #Her defineres en funktion der tilføjer et spellslot af et specifikt level
-    if i >= 1 and i <= 9:
-
+    i = int(input("What level spellslot do you want to add?\n"))
+    #Her vælger brugeren hvilket lvl spellslot der skal tilføjes
+    try:
         data[charnumber]['maxss'][str(i)] += 1
-
+        #Her prøves at tilføje et ekstra spellslot af det valgte lvl
         with open('data.json', 'w', encoding="utf-8") as f:
                 json.dump(data, f)
                 f.close()
-    else:
+                #Her gemmes ændringerne i data.json
+    except:
         print("Spellslots of that lvl doesn't exist\n")
+        #Hvis lvl-inputtet var udfyldt forkert får brugeren det at vide
 
 def setSpellSlot(i):
     numslot = input("How many spell slots of this level do you have?\n")
