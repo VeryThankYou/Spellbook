@@ -35,14 +35,14 @@ def prepSpell():
                 json.dump(data, f)
                 f.close()
                 #her gemmes dataen i data.json
-            print(str(spell) + " has succesfully been prepared\n") 
-            
+            print(str(spell) + " has succesfully been prepared\n")
+            #Brugeren får at vide at spellen er blevet prepareret
     except:
         answer = input("Invalid index number. Would you like to try again? (y/n)")
+        #I except-delen får de at vide at der skete en index-fejl, og de bliver spurgt om de vil prøve igen
         if answer == "y":
             prepSpell()
-        pass
-    
+            #Hvis de svarer ja, kaldes funktionen igen
 
 
 
@@ -90,11 +90,15 @@ def setlvl(i):
             f.close()
 
 def longRest():
+    #Her defineres funktionen som nulstiller brugerens brugte spellslots
     for e in data[charnumber]['usedss']:
         data[charnumber]['usedss'][e] = 0
+        #Her gennemgås listen over forskellige levels af spellslots, og de sættes alle til 0
     with open('data.json', 'w', encoding="utf-8") as f:
-            json.dump(data, f)
-            f.close()
+        json.dump(data, f)
+        f.close()
+        #Her gemmes ændringerne i data.json
+
 
 def useSpell(i):
     if data[charnumber]['usedss'][str(i)] >= data[charnumber]['maxss'][str(i)]:
@@ -105,11 +109,18 @@ def useSpell(i):
             json.dump(data, f)
             f.close()    
 
-def addSpellSlot(i):
-    data[charnumber]['maxss'][str(i)] += 1
-    with open('data.json', 'w', encoding="utf-8") as f:
-            json.dump(data, f)
-            f.close()
+def addSpellSlot():
+    i = int(input("What level spellslot do you want to add?\n"))
+    #Her defineres en funktion der tilføjer et spellslot af et specifikt level
+    if i >= 1 and i <= 9:
+
+        data[charnumber]['maxss'][str(i)] += 1
+
+        with open('data.json', 'w', encoding="utf-8") as f:
+                json.dump(data, f)
+                f.close()
+    else:
+        print("Spellslots of that lvl doesn't exist\n")
 
 def setSpellSlot(i):
     numslot = input("How many spell slots of this level do you have?\n")
@@ -161,7 +172,6 @@ def unprepSpell():
      
 data = updateData()
 charnumber = 0
-#prepSpell("Fireball")
 #learnSpell("acid Arrow")
 #learnSpell("eldri")
 #lvlup()
