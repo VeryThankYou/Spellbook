@@ -18,14 +18,19 @@ def charSel():
     answer = input("")
     if answer[0] == "*":
         apiStuff.findSpell(answer.replace("*",""))
+        charSel()
     elif answer[0] == "+":
         gemDataModul.addChar(answer.replace("+",""))
+        charnumber = len(charData) - 1
+        mainMenu()
     else:
         try:
             if int(answer) <= len(charData):
-                charNum = int(answer) - 1
+                charnumber = int(answer) - 1
+                mainMenu()
         except:
             print("nope, prøv igen, kammerat")
+            charSel()
 
 def mainMenu():
 
@@ -45,18 +50,20 @@ def mainMenu():
             gemDataModul.longRest()
             gemDataModul.prepSpell()
             gemDataModul.unprepSpell()
+            mainMenu()
         elif specAct == "lvlup":
             gemDataModul.lvlup()
             gemDataModul.updateSpellSlots()
+            mainMenu()
         else:
             print("Please write an actual function")
     elif mAnswer[0] == "-":
         uSpell = mAnswer.replace("-","")
         gemDataModul.useSpell(uSpell)
+        mainMenu()
     elif mAnswer[0] == "/":
         gemDataModul.learnSpell(mAnswer.replace("/",""))
     else:
         print("try again")
 
-charnumber = 0
-mainMenu()
+charSel()
