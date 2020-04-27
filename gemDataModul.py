@@ -107,7 +107,7 @@ def useSpell(i):
         data[charnumber]['usedss'][str(i)] = data[charnumber]['usedss'][str(i)] + 1
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
-            f.close()    
+            f.close()
 
 def addSpellSlot():
     #Her defineres en funktion der tilføjer et spellslot af et specifikt level
@@ -153,7 +153,7 @@ def addChar(name):
     with open('data.json', 'w', encoding="utf-8") as f:
         json.dump(data, f)
         f.close()
-    
+
 def unprepSpell():
     for e in data[charnumber]['prep']:
         print(str(data[charnumber]['prep'].index(e) + 1) + " - " + str(e) + "\n")
@@ -169,9 +169,9 @@ def unprepSpell():
             unprepSpell()
         else:
             pass
-    
 
-     
+
+
 data = updateData()
 charnumber = 0
 #learnSpell("acid Arrow")
@@ -183,5 +183,5 @@ charnumber = 0
 #addSpellSlot(3)
 #setSpellSlot(3)
 #updateSpellSlots()
-learnSpell("delayed blast fire")
-prepSpell()
+#learnSpell("delayed blast fire")
+#prepSpell()
