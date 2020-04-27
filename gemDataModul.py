@@ -47,14 +47,21 @@ def prepSpell():
 
 
 def learnSpell(string):
+    #Her defineres en funktion der finder en spell fra api'en, og tilføjer det til listen over spells karakteren kender. Funktionen modtager parametret string, navnet på den spell man vil tilføje
     response = requests.get("https://api.open5e.com/spells/?search="+str(string))
     response = response.json()
+    #Her søges på api'en efter inputtet, og api'ens response gemmes på json-format
+
     if len(response['results']) > 1:
+        #Nu tjekkes om der er mere end et resultat fra søgningen
         n = 1
+        #Her defineres en hjælpevariabel
         for e in response['results']:
             print(str(n)+" - "+str(e['name']))
+            #Her printes alle resultater fra søgningen, med deres index-tal + 1 foran
             n += 1
-        print("What spell did you mean?")
+            #Her lægges 1 til hjælpevariabel
+        print("What spell did you mean?\n")
         inp = int(input("Choose spell by index number\n"))
         spellname = response['results'][inp-1]['name']
     else:
