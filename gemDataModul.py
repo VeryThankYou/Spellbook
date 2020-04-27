@@ -114,7 +114,7 @@ def useSpell(i):
         data[charnumber]['usedss'][str(i)] = data[charnumber]['usedss'][str(i)] + 1
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
-            f.close()    
+            f.close()
 
 def addSpellSlot():
     #Her defineres en funktion der tilføjer et spellslot af et specifikt level
@@ -145,7 +145,7 @@ def setSpellSlot(i):
     except:
         print("You didn't provide a number as an input\n")
         #Hvis lvl-inputtet var udfyldt forkert får brugeren det at vide
-    
+
 
 
 def updateSpellSlots():
@@ -175,7 +175,7 @@ def addChar(name):
         json.dump(data, f)
         f.close()
         #Her gemmes ændringerne i data.json
-    
+
 def unprepSpell():
     #Her defineres en funktion der kan fjerne spells fra listen over preparerede spells
     for e in data[charnumber]['prep']:
@@ -196,9 +196,10 @@ def unprepSpell():
         if answer == "y":
             unprepSpell()
             #Hvis brugeren giver inputtet for ja, kaldes funktionen igen
-    
 
-     
+
+
+
 data = updateData()
 charnumber = 0
 #learnSpell("acid Arrow")
@@ -210,5 +211,5 @@ charnumber = 0
 #addSpellSlot(3)
 #setSpellSlot(3)
 #updateSpellSlots()
-learnSpell("delayed blast fire")
-prepSpell()
+#learnSpell("delayed blast fire")
+#prepSpell()
