@@ -67,22 +67,35 @@ def learnSpell(string):
         spellname = response['results'][inp-1]['name']
         #Her gemmes den valgte spells navn i variablen spellname
     elif len(response['results']) == 1:
-        #Her tjekkes om 
-        spellname = response['results'][0]['name']
+        #Her tjekkes om der er et enkelt response
+        answer = input("Do you want to learn the spell " + str(response['results'][0]['name']) + "? (y/n)\n")
+        #Nu spørges brugeren om de vil lære den fundne spell
+        if answer == "y":
+            spellname = response['results'][0]['name']
+            #Hvis svaret er ja, gemmes spellens navn i variablen spellname
+        else:
+            return
+            #Funktionen stoppes
     else:
         print("No results")
         return
+        #Hvis der ikke er nogen resultater for søgningen, får brugeren dette at vide, og funktionen stoppes
     known = 0
+    #Hjælpevariabel der tæller om man kender en spell af samme navn
     for e in data[charnumber]['know']:
         if e == spellname:
             known += 1
+            #For hver spell man kender, tjekkes om navnet er lig spellname, hvis det er lægges 1 til known
     if known > 0:
         print("You have learned this spell already.")
+        #Hvis known er større end 0, får brugeren at vide at de allerede kender spellen
     else:
         data[charnumber]['know'].append(str(spellname))
+        #Ellers gemmes spellen i listen over kendte spells
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
             f.close()
+            #Her gemmes ændringerne i data.json
 
 def lvlup():
     if int(data[charnumber]['lvl']) >= 20:
@@ -203,6 +216,26 @@ def unprepSpell():
             unprepSpell()
             #Hvis brugeren giver inputtet for ja, kaldes funktionen igen
     
+def deleteCharacter():
+    #Her defineres en funktion der kan fjerne karakterer fra datafilen
+    for e in data:
+        print(str(index(e) + 1) + " - " + str(e['name']) + "\n")
+        #Her printen hver karakter i listen, sammen med deres indexnummer + 1
+    indx = int(input("Write the index number of the character you want to delete\n"))
+    #Her giver brugeren et input med det viste indextal på den karakter der skal fjernes
+    try:
+        del data[indx-1]
+        #Her prøves at slette elementet i listen med det valgte index-nummer
+        with open('data.json', 'w', encoding="utf-8") as f:
+            json.dump(data, f)
+            f.close()
+            #Her gemmes ændringerne i data.json
+    except:
+        answer = input("Invalid index number. Would you like to try again? (y/n)")
+        #Hvis det var et ugyldigt index-nummer får brugeren dette at vide, og der spørges om funktionen skal kaldes igen
+        if answer == "y":
+            deleteCharacter()
+            #Hvis brugeren giver inputtet for ja, kaldes funktionen igen
 
      
 data = updateData()
