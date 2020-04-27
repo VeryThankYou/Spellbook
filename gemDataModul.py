@@ -125,11 +125,21 @@ def addSpellSlot():
         #Hvis lvl-inputtet var udfyldt forkert får brugeren det at vide
 
 def setSpellSlot(i):
+    #Her defineres en funktion der sætter antallet af spellslots af et specifikt level til i, parametret til funktionen
     numslot = input("How many spell slots of this level do you have?\n")
-    data[charnumber]['maxss'][str(i)] = int(numslot)
-    with open('data.json', 'w', encoding="utf-8") as f:
-            json.dump(data, f)
-            f.close()
+    #Her bedes brugeren om at skrive hvor mange spellslots af det level der skal være
+    try:
+        data[charnumber]['maxss'][str(i)] = int(numslot)
+        #Her prøves at sætte mængden af spellslots til inputtet
+        with open('data.json', 'w', encoding="utf-8") as f:
+                json.dump(data, f)
+                f.close()
+                #Her gemmes ændringerne i data.json
+    except:
+        print("You didn't provide a number as an input\n")
+        #Hvis lvl-inputtet var udfyldt forkert får brugeren det at vide
+    
+
 
 def updateSpellSlots():
     with open('slotdata.json', 'r', encoding="utf-8") as f:
@@ -145,30 +155,40 @@ def updateSpellSlots():
         f.close()
 
 def addChar(name):
+    #Her defineres en funktion som tilføjer en ekstra karakter til data.json. Funktionen modtager parametret name, som er navnet på den karakter der skal tilføjes
     with open('struktur.json', 'r', encoding="utf-8") as f:
         structure = json.load(f)
         f.close()
+        #Her åbnes strukturen for det json-objekt der beskriver en karakter, og gemmes i en variabel
     structure[0]['name'] = name
+    #Her sættes karakterens navn i struktur-variablen til parametret name. Bemærk at dette ikke gemmes i struktur.json, da denne skal indeholde den tomme struktur for en karakter
     data.append(structure[0])
+    #Nu tilføjes json-elementet til dataen
     with open('data.json', 'w', encoding="utf-8") as f:
         json.dump(data, f)
         f.close()
+        #Her gemmes ændringerne i data.json
     
 def unprepSpell():
+    #Her defineres en funktion der kan fjerne spells fra listen over preparerede spells
     for e in data[charnumber]['prep']:
         print(str(data[charnumber]['prep'].index(e) + 1) + " - " + str(e) + "\n")
+        #Her printen hver spell i listen, sammen med deres indexnummer + 1
     indx = int(input("Write the index number of the spell you want to remove from your prepared list\n"))
+    #Her giver brugeren et input med det viste indextal på sen spell der skal fjernes
     try:
         del data[charnumber]['prep'][indx-1]
+        #Her prøves at slette elementet i listen med det valgte index-nummer
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
             f.close()
+            #Her gemmes ændringerne i data.json
     except:
         answer = input("Invalid index number. Would you like to try again? (y/n)")
+        #Hvis det var et ugyldigt index-nummer får brugeren dette at vide, og der spørges om funktionen skal kaldes igen
         if answer == "y":
             unprepSpell()
-        else:
-            pass
+            #Hvis brugeren giver inputtet for ja, kaldes funktionen igen
     
 
      
