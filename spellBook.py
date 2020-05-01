@@ -40,10 +40,11 @@ def mainMenu():
     print(' - To use a spell, write: "-[level of used spellslot]"')
     print(' - To sleep, write: "+sleep"')
     print(' - To level up, write: "+lvlup"')
-    print(' - To learn a spell, write: "+[spell name]"')
+    print(' - To learn a spell, write: "/[spell name]"')
     mAnswer = input("")
     if mAnswer[0] == "*":
         apiStuff.findSpell(mAnswer.replace("*",""))
+        mainMenu()
     elif mAnswer[0] == "+":
         specAct = mAnswer.replace("+","")
         if specAct == "sleep":
@@ -57,13 +58,16 @@ def mainMenu():
             mainMenu()
         else:
             print("Please write an actual function")
+            mainMenu()
     elif mAnswer[0] == "-":
         uSpell = mAnswer.replace("-","")
         gemDataModul.useSpell(uSpell)
         mainMenu()
     elif mAnswer[0] == "/":
         gemDataModul.learnSpell(mAnswer.replace("/",""))
+        mainMenu()
     else:
         print("try again")
+        mainMenu()
 
 charSel()
