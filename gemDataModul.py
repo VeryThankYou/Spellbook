@@ -98,22 +98,30 @@ def learnSpell(string):
             #Her gemmes ændringerne i data.json
 
 def lvlup():
+    #Her defineres en funktion der tilføjer et level til ens karakter i dataen
     if int(data[charnumber]['lvl']) >= 20:
         print("You are already at max level")
+        #Først tjekkes om karakteren er i max lvl. Hvis de er, får de dette at vide
     else:
         data[charnumber]['lvl'] = int(data[charnumber]['lvl']) + 1
+        #Hvis ikke, lægges 1 til deres lvl i dataen
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
             f.close()
+            #Her gemmes ændringerne i data.json
 
 def setlvl(i):
+    #Her defineres en funktion der sætter karakterens level til et givent tal, nemlig parametret i
     if int(i) < 1 or int(i) > 20:
         print("Your input has to be within the level range 1-20")
+        #Først tjekkes om i er mellem 1 og 20, da dette er lvl-intervallet i D&D, hvis ikke får brugeren dette at vide
     else:
         data[charnumber]['lvl'] = int(i)
+        #Ellers sættes karakterens lvl til i i dataen
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
             f.close()
+            #Her gemmes ændringerne i data.json
 
 def longRest():
     #Her defineres funktionen som nulstiller brugerens brugte spellslots
@@ -127,13 +135,17 @@ def longRest():
 
 
 def useSpell(i):
+    #Her defineres en funktion der sætter tilføjer en brugt spellslot til dictionariet over brugte spellslots. Parametret i bestemmer hvilket lvl spellslot der bruges
     if data[charnumber]['usedss'][str(i)] >= data[charnumber]['maxss'][str(i)]:
         print("You have expended all spell slots of that level.")
+        #Her tjekkes først om der er flere ubrugte spellslots af det valgte lvl
     else:
         data[charnumber]['usedss'][str(i)] = data[charnumber]['usedss'][str(i)] + 1
+        #Hvis der er det, tillægges et brugt spellslot af det valgte lvl til dataen
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
             f.close()
+            #Her gemmes dataen i data.json
 
 def addSpellSlot():
     #Her defineres en funktion der tilføjer et spellslot af et specifikt level
@@ -219,7 +231,7 @@ def unprepSpell():
 def deleteCharacter():
     #Her defineres en funktion der kan fjerne karakterer fra datafilen
     for e in data:
-        print(str(index(e) + 1) + " - " + str(e['name']) + "\n")
+        print(str(data.index(e) + 1) + " - " + str(e['name']) + "\n")
         #Her printen hver karakter i listen, sammen med deres indexnummer + 1
     indx = int(input("Write the index number of the character you want to delete\n"))
     #Her giver brugeren et input med det viste indextal på den karakter der skal fjernes
