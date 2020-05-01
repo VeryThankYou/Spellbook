@@ -180,17 +180,24 @@ def setSpellSlot(i):
 
 
 def updateSpellSlots():
+    #Her defineres en feunktion der sætter karakterens spellslots til at passe til det lvl karakteren er i (fungerer kun for wizards)
     with open('slotdata.json', 'r', encoding="utf-8") as f:
         wizdict = json.load(f)
         f.close()
+        #Først læses mængden af spellslots wizards har i sit lvl, og det gemmes i variablen wizdict som et dictionary
     lvl = data[charnumber]['lvl']
     tal = 1
+    #Nu findes karakterens lvl i dataen og gemmes i en variabel, og hjælpevariablen tal oprettes
     for e in wizdict[0][str(lvl)]:
-        data[charnumber]['maxss'][str(tal)] = wizdict[0][str(lvl)][e]
+        #Her kører en for-løkke, der kører for hvert level af spellslots i det dictionary i wizdict der har index lig karakterens lvl
+        data[charnumber]['maxss'][str(tal)] = wizdict[0][str(lvl)][e] 
         tal += 1
+        #Hver gennemkørsel af løkken sættes karakterens mængde af spellslots af det level løkken er på, til den mængde der er af de spellslots i wizdicts dictionary til karakterens lvl
+        #Derudover lægges 1 til tal
     with open('data.json', 'w', encoding="utf-8") as f:
         json.dump(data, f)
         f.close()
+        #Her gemmes ændringerne i data.json
 
 def addChar(name):
     #Her defineres en funktion som tilføjer en ekstra karakter til data.json. Funktionen modtager parametret name, som er navnet på den karakter der skal tilføjes
@@ -261,5 +268,6 @@ charnumber = 0
 #addSpellSlot(3)
 #setSpellSlot(3)
 #updateSpellSlots()
-# learnSpell("delayed blast fire")
-# prepSpell()
+#learnSpell("delayed blast fire")
+#prepSpell()
+#Hernede er kaldtes funktioner under udvikling
