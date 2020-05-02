@@ -49,6 +49,7 @@ def mainMenu():
     print(' - To search for a spell, write: "*[spell name]" (use 2 * for more info)')
     print(' - To use a spell, write: "-[level of used spellslot]"')
     print(' - To sleep, write: "/sleep"')
+    print(' - To view your spellbook, write: "/view"')
     print(' - To level up, write: "/lvlup"')
     print(' - To learn a spell, write: "+[spell name]"')
     mAnswer = input("")
@@ -67,6 +68,16 @@ def mainMenu():
         elif specAct == "lvlup":
             gemDataModul.lvlup()
             gemDataModul.updateSpellSlots()
+            mainMenu()
+
+        elif specAct == "view":
+            cata = input('\nWould you like to view your know spells or prepared spells?\n1. Know\n2. Prepared\n')
+            if cata == "1":
+                for e in charData[charnumber]:
+                    print(e)
+            elif cata == "2":
+                for e in charData[charnumber]:
+                    print(e)
             mainMenu()
 
         else:
