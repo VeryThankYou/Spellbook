@@ -133,7 +133,6 @@ def longRest():
         f.close()
         #Her gemmes ændringerne i data.json
 
-
 def useSpell(i):
     #Her defineres en funktion der sætter tilføjer en brugt spellslot til dictionariet over brugte spellslots. Parametret i bestemmer hvilket lvl spellslot der bruges
     if data[charnumber]['usedss'][str(i)] >= data[charnumber]['maxss'][str(i)]:
@@ -177,8 +176,6 @@ def setSpellSlot(i):
         print("You didn't provide a number as an input\n")
         #Hvis lvl-inputtet var udfyldt forkert får brugeren det at vide
 
-
-
 def updateSpellSlots():
     #Her defineres en feunktion der sætter karakterens spellslots til at passe til det lvl karakteren er i (fungerer kun for wizards)
     with open('slotdata.json', 'r', encoding="utf-8") as f:
@@ -190,7 +187,7 @@ def updateSpellSlots():
     #Nu findes karakterens lvl i dataen og gemmes i en variabel, og hjælpevariablen tal oprettes
     for e in wizdict[0][str(lvl)]:
         #Her kører en for-løkke, der kører for hvert level af spellslots i det dictionary i wizdict der har index lig karakterens lvl
-        data[charnumber]['maxss'][str(tal)] = wizdict[0][str(lvl)][e] 
+        data[charnumber]['maxss'][str(tal)] = wizdict[0][str(lvl)][e]
         tal += 1
         #Hver gennemkørsel af løkken sættes karakterens mængde af spellslots af det level løkken er på, til den mængde der er af de spellslots i wizdicts dictionary til karakterens lvl
         #Derudover lægges 1 til tal

@@ -1,10 +1,14 @@
 import json
 import requests
 
-def tranScribe(spelStuff):
+def tranScribe(spelStuff, detail = 0):
     for e in spelStuff:
-        if e == "archetype" or e == "dnd_class" or e == "school" or e == "slug" or e == "page" or e == "level_int" or e == "circles" or e == "document__slug" or e == "document__title" or e == "document__license_url":
-            continue
+        if detail == 0:
+            if e == "archetype" or e == "dnd_class" or e == "school" or e == "circles" or e == "page" or e == "slug" or e == "level_int" or e == "document__slug" or e == "document__title" or e == "document__license_url":
+                continue
+        elif detail == 1:
+            if e == "slug" or e == "level_int" or e == "document__slug" or e == "document__title" or e == "document__license_url":
+                continue
 
         elif e == "desc":
             print("Description", end = "")
@@ -18,7 +22,7 @@ def tranScribe(spelStuff):
         print(":    ", end = "")
         print(spelStuff.get(e).capitalize().replace("<br/>",", "))
 
-def findSpell(preDef = "***"):
+def findSpell(preDef = "***", detail = 0):
 
     if preDef == "***":
         searchThis = input("Hvilken besværgelse vil du gerne finde?\n")
@@ -41,11 +45,11 @@ def findSpell(preDef = "***"):
                 print(num, end = ". ")
                 print(spelz[e])
             ans = int(input("Which of these spells is l00k 4? - Write its number!\n" ))
-            tranScribe(dic2[ans - 1])
+            tranScribe(dic2[ans - 1], detail)
 
         elif dic.get("count") == 1:
             ans1 = dic2[0]
-            tranScribe(ans1)
+            tranScribe(ans1, detail)
 
         elif dic.get("count") == 0:
             print("There are no spellzzz with this naeem\n")
