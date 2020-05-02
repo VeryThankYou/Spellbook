@@ -270,4 +270,4 @@ charnumber = 0
 #updateSpellSlots()
 #learnSpell("delayed blast fire")
 #prepSpell()
-#Hernede er kaldtes funktioner under udvikling
+#Hernede kaldtes funktioner under udvikling
