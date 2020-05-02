@@ -6,10 +6,15 @@ print('\nWelcome to Spellbook 720!!!1\n\n')
 
 def charSel():
 
-    print('\nYou need to select a character or create a new one to continue.\n - To search for a spell, write: "*[spell name]" (use 2 * for more info)\n - To select a character, write the number of the character.\n - To create a new character, write "+[Character name]"\n - To delete a character, write "-"\n')
+    print('\nYou need to select a character or create a new one to continue.')
+    print(' - To search for a spell, write: "*[spell name]" (use 2 * for more info)')
+    print(' - To select a character, write the number of the character.')
+    print(' - To create a new character, write "+[Character name]"')
+    print(' - To delete a character, write "-"')
+
     num = 0
     charData = gemDataModul.updateData()
-    print("Characters:")
+    print("\nCharacters:")
     for i in charData:
         num = num + 1
         print(num, end = ". ")
@@ -40,18 +45,18 @@ def charSel():
 def mainMenu():
 
     charData = gemDataModul.updateData()
-    print("Here you can use/search a spell, sleep, and level up!\n")
+    print("\nHere you can use/search a spell, sleep, and level up!")
     print(' - To search for a spell, write: "*[spell name]" (use 2 * for more info)')
     print(' - To use a spell, write: "-[level of used spellslot]"')
-    print(' - To sleep, write: "+sleep"')
-    print(' - To level up, write: "+lvlup"')
-    print(' - To learn a spell, write: "/[spell name]"')
+    print(' - To sleep, write: "/sleep"')
+    print(' - To level up, write: "/lvlup"')
+    print(' - To learn a spell, write: "+[spell name]"')
     mAnswer = input("")
     if mAnswer[0] == "*":
         apiStuff.findSpell(mAnswer.replace("*",""))
         mainMenu()
-    elif mAnswer[0] == "+":
-        specAct = mAnswer.replace("+","")
+    elif mAnswer[0] == "/":
+        specAct = mAnswer.replace("/","")
 
         if specAct == "sleep":
             gemDataModul.longRest()
@@ -73,8 +78,8 @@ def mainMenu():
         gemDataModul.useSpell(uSpell)
         mainMenu()
 
-    elif mAnswer[0] == "/":
-        gemDataModul.learnSpell(mAnswer.replace("/",""))
+    elif mAnswer[0] == "+":
+        gemDataModul.learnSpell(mAnswer.replace("+",""))
         mainMenu()
 
     else:

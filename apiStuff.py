@@ -40,11 +40,13 @@ def findSpell(preDef = "***", detail = 0):
             spelz = []
             for e in dic2:
                 spelz.append(e.get("name"))
+            print("\nTo select a spell, write its number.")
             for e in range(len(spelz)):
                 num = e+1
                 print(num, end = ". ")
                 print(spelz[e])
-            ans = int(input("Which of these spells is l00k 4? - Write its number!\n" ))
+
+            ans = int(input(""))
             tranScribe(dic2[ans - 1], detail)
 
         elif dic.get("count") == 1:
