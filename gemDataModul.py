@@ -15,10 +15,10 @@ def prepSpell():
     for e in data[charnumber]['know']:
         print(str(data[charnumber]['know'].index(e) + 1) + " - " + str(e) + "\n")
         #Først printes navnet på alle spells karakteren kender
-    indx = int(input("Write the index number of the spell you want to prepare\n"))
+    indx = input("Write the index number of the spell you want to prepare\n")
     #Brugeren vælger den spell der skal prepareres
     try:
-        spell = data[charnumber]['know'][indx-1]
+        spell = data[charnumber]['know'][int(indx)-1]
         #Her gemmes navnet på den valgte spell. Dette gøres i en try-løkke så brugeren kan indtaste et forkert index uden at ødelægge programmet
         count = 0
         #Her oprettes en variabel der holder styr på om man har en spell med samme navn prepareret i forvejen
@@ -62,9 +62,15 @@ def learnSpell(string):
             n += 1
             #Her lægges 1 til hjælpevariabel
         print("What spell did you mean?\n")
-        inp = int(input("Choose spell by index number\n"))
+        inp = input("Choose spell by index number\n")
         #Her giver brugeren input om hvilket af resultaterne de ville lære
-        spellname = response['results'][inp-1]['name']
+        try:
+            spellname = response['results'][int(inp)-1]['name']
+            #I try-klausulen prøves at gemme den valgte spells navn i variablen spellname
+        except:
+            print("Invalid index\n")
+            #Hvis brugeren gav et forkert input, får de det at vide, og funktionen stoppes
+            return
         #Her gemmes den valgte spells navn i variablen spellname
     elif len(response['results']) == 1:
         #Her tjekkes om der er et enkelt response
@@ -91,7 +97,8 @@ def learnSpell(string):
         #Hvis known er større end 0, får brugeren at vide at de allerede kender spellen
     else:
         data[charnumber]['know'].append(str(spellname))
-        #Ellers gemmes spellen i listen over kendte spells
+        print("You have now learned " + str(spellname) + " successfully\n")
+        #Ellers gemmes spellen i listen over kendte spells, og det printes at navnet på den valgte spell er gemt korrekt
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
             f.close()
@@ -291,7 +298,7 @@ charnumber = 0
 #addSpellSlot(3)
 #setSpellSlot(3)
 #updateSpellSlots()
-#learnSpell("delayed blast fire")
+learnSpell("blas")
 #prepSpell()
 #regenSpellslot()
 #Hernede kaldtes funktioner under udvikling
