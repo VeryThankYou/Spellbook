@@ -55,7 +55,7 @@ def mainMenu(charNR):
     print(' - To sleep, write: "/sleep"')
     print(' - To view your spellbook, write: "/book"')
     print(' - To level up, write: "/lvlup"')
-    print(' - To view you spellslots, write: "/slots"')
+    print(' - To view you spellslots and level, write: "/info"')
     print(' - To learn a spell, write: "+[spell name]"')
     mAnswer = input("")
     if mAnswer[0] == "*":
@@ -84,7 +84,9 @@ def mainMenu(charNR):
 
             mainMenu(charnumber)
 
-        elif specAct == "slots":
+        elif specAct == "info":
+            print(charData[charnumber].get("name") + ' is level ', end="")
+            print(charData[charnumber].get("lvl"))
             for e in charData[charnumber].get("maxss"):
                 print(e, end=". ")
                 print(int(charData[charnumber].get("maxss").get(e)) - int(charData[charnumber].get("usedss").get(e)), end="/")
