@@ -31,19 +31,20 @@ def charSel():
     elif answer[0] == "+":
         gemDataModul.addChar(answer.replace("+",""))
         charnumber = len(charData) - 1
-        mainMenu()
+        mainMenu(charnumber)
     elif answer[0] == "-":
         gemDataModul.deleteCharacter()
         charSel()
     elif answer.isnumeric() == True and int(answer) <= len(charData) and int(answer) > 0:
         charnumber = int(answer) - 1
-        mainMenu()
+        mainMenu(charnumber)
     else:
         print("nope, prøv igen, kammerat")
         charSel()
 
-def mainMenu():
+def mainMenu(charNR):
 
+    charnumber = charNR
     charData = gemDataModul.updateData()
     print("\nHere you can use/search a spell, sleep, and level up!")
     print(' - To search for a spell, write: "*[spell name]" (use 2 * for more info)')
@@ -55,7 +56,7 @@ def mainMenu():
     mAnswer = input("")
     if mAnswer[0] == "*":
         apiStuff.findSpell(mAnswer.replace("*",""))
-        mainMenu()
+        mainMenu(charnumber)
     elif mAnswer[0] == "/":
         specAct = mAnswer.replace("/","")
 
@@ -63,38 +64,39 @@ def mainMenu():
             gemDataModul.longRest()
             gemDataModul.prepSpell()
             gemDataModul.unprepSpell()
-            mainMenu()
+            mainMenu(charnumber)
 
         elif specAct == "lvlup":
             gemDataModul.lvlup()
             gemDataModul.updateSpellSlots()
-            mainMenu()
+            mainMenu(charnumber)
 
         elif specAct == "view":
-            cata = input('\nWould you like to view your know spells or prepared spells?\n1. Know\n2. Prepared\n')
+            cata = input('\nWould you like to view your prepared spells or known spells?\n1. Prepared\n2. Known\n')
             if cata == "1":
-                for e in charData[charnumber]:
+
+                for e in charData[charnumber].get("known"):
                     print(e)
             elif cata == "2":
-                for e in charData[charnumber]:
+                for e in charData[charnumber].get("prep"):
                     print(e)
-            mainMenu()
+            mainMenu(charnumber)
 
         else:
             print("Please write an actual function")
-            mainMenu()
+            mainMenu(charnumber)
 
     elif mAnswer[0] == "-":
         uSpell = mAnswer.replace("-","")
         gemDataModul.useSpell(uSpell)
-        mainMenu()
+        mainMenu(charnumber)
 
     elif mAnswer[0] == "+":
         gemDataModul.learnSpell(mAnswer.replace("+",""))
-        mainMenu()
+        mainMenu(charnumber)
 
     else:
         print("try again")
-        mainMenu()
+        mainMenu(charnumber)
 
 charSel()
