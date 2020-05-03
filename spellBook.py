@@ -56,6 +56,7 @@ def mainMenu(charNR):
     print(' - To view your spellbook, write: "/book"')
     print(' - To level up, write: "/lvlup"')
     print(' - To view you spellslots and level, write: "/info"')
+    print(' - To regenerate a spellslot, write: "/regen"')
     print(' - To learn a spell, write: "+[spell name]"')
     mAnswer = input("")
     if mAnswer[0] == "*":
@@ -91,6 +92,10 @@ def mainMenu(charNR):
                 print(e, end=". ")
                 print(int(charData[charnumber].get("maxss").get(e)) - int(charData[charnumber].get("usedss").get(e)), end="/")
                 print(charData[charnumber].get("maxss").get(e))
+            mainMenu(charnumber)
+
+        elif specAct == "regen":
+            gemDataModul.regenSpellslot()
             mainMenu(charnumber)
 
         else:
