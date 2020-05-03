@@ -254,21 +254,29 @@ def deleteCharacter():
             #Hvis brugeren giver inputtet for ja, kaldes funktionen igen
 
 def regenSpellslot():
+    #Her defineres en funktion der kan bruges til at regenerere enkelte spellslots, altså trække de fra listen over brugte spellslots i dataen
     for e in data[charnumber]["maxss"]:
-        print(e, end=". ")
-        print(str(int(data[charnumber]["maxss"][e]) - int(data[charnumber]["usedss"][e])) + "/" + str(data[charnumber]["maxss"][e]) + "\n")
+        #Først kører en for-løkke for hvert lvl spellslot der findes
+        print(str(e) + ". " + str(int(data[charnumber]["maxss"][e]) - int(data[charnumber]["usedss"][e])) + "/" + str(data[charnumber]["maxss"][e]))
+        #Her printes hvilken mængde brugte og mulige spellslots brugeren har af dette level
     inp = input("What level spellslot do you want to regenerate?\n")
+    #Her spørges om hvilket level spellslot der skal regenereres, svaret gemmes i en variabel
     try:
+        #Her bruges en try- except-løkke, der kan fange om brugeren har givet ugyldigt input
         if data[charnumber]["usedss"][str(inp)] > 0:
+            #Nu bruges en if-sætning til at tjekke om karakteren har brugte spellslots af det valgte level
             data[charnumber]["usedss"][str(inp)] -= 1
+            #Hvis de har, trækkes et fra de brugte spellslots af det level
             with open('data.json', 'w', encoding="utf-8") as f:
                 json.dump(data, f)
                 f.close()
                 #Her gemmes ændringerne i data.json
         else:
             print("You don't have a used spellslot of that level\n")
+            #Hvis ikke der er nogen brugte spellslots af det level, får brugeren dette at vide
     except:
         print("Invalid input\n")
+        #Hvis brugeren gav ugyldigt input, printes dette faktum
 
 
 
