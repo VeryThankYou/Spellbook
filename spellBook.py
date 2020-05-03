@@ -159,7 +159,7 @@ def mainMenu(charNR):
             mainMenu(charnumber)
             # Hvis inputet ikke passede nogen if-statement, lad brugeren prøve igen.
 
-    elif mAnswer[0] == "-" and mAnswer.replace("-","").isnumeric() == True and mAnswer.replace("-","").isnumeric() != 0 and mAnswer.replace("-","").isnumeric() =< 9:
+    elif mAnswer[0] == "-" and mAnswer.replace("-","").isnumeric() == True and mAnswer.replace("-","").isnumeric() != 0 and mAnswer.replace("-","").isnumeric() <= 9:
         # Tjekker om det første element i string'en er et -, og at der er et tal mellem 1 og 9
         uSpell = mAnswer.replace("-","")
         # Fjerne -'et og gemmer det i uSpell
