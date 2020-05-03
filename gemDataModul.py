@@ -155,7 +155,7 @@ def useSpell(i):
 
 def addSpellSlot():
     #Her defineres en funktion der tilføjer et spellslot af et specifikt level
-    i = int(input("What level spellslot do you want to add?\n"))
+    i = input("What level spellslot do you want to add?\n")
     #Her vælger brugeren hvilket lvl spellslot der skal tilføjes
     try:
         data[charnumber]['maxss'][str(i)] += 1
