@@ -47,6 +47,7 @@ def mainMenu(charNR):
     charnumber = charNR
     gemDataModul.charnumber = charnumber
     charData = gemDataModul.updateData()
+    gemDataModul.data = charData
 
     print("\nHere you can use/search a spell, sleep, and level up!")
     print(' - To search for a spell, write: "*[spell name]" (use 2 * for more info)')
@@ -54,7 +55,7 @@ def mainMenu(charNR):
     print(' - To sleep, write: "/sleep"')
     print(' - To view your spellbook, write: "/book"')
     print(' - To level up, write: "/lvlup"')
-    print(' - To view you spellslots, write: "/slots"')
+    print(' - To view you spellslots and level, write: "/info"')
     print(' - To learn a spell, write: "+[spell name]"')
     mAnswer = input("")
     if mAnswer[0] == "*":
@@ -64,10 +65,7 @@ def mainMenu(charNR):
         specAct = mAnswer.replace("/","")
 
         if specAct == "sleep":
-            gemDataModul.longRest()
-            gemDataModul.prepSpell()
-            gemDataModul.unprepSpell()
-            mainMenu(charnumber)
+            sleepz(charNR)
 
         elif specAct == "lvlup":
             gemDataModul.lvlup()
@@ -86,7 +84,9 @@ def mainMenu(charNR):
 
             mainMenu(charnumber)
 
-        elif specAct == "slots":
+        elif specAct == "info":
+            print(charData[charnumber].get("name") + ' is level ', end="")
+            print(charData[charnumber].get("lvl"))
             for e in charData[charnumber].get("maxss"):
                 print(e, end=". ")
                 print(int(charData[charnumber].get("maxss").get(e)) - int(charData[charnumber].get("usedss").get(e)), end="/")
@@ -109,5 +109,36 @@ def mainMenu(charNR):
     else:
         print("try again")
         mainMenu(charnumber)
+
+def sleepz(charNR):
+
+    charData = gemDataModul.updateData()
+    gemDataModul.data = charData
+
+    print('\nHere you can prepare and "unprepare" spells')
+    print(' - To prepare a spell, write /prep.')
+    print(' - To "unprepare" a spell, write /unprep.')
+    print(' - To "wake up", write /wake.')
+    sAnswer = input('')
+
+    if sAnswer[0] == "/":
+        sleepAct = sAnswer.replace("/","")
+        if sleepAct == "prep":
+            gemDataModul.prepSpell()
+            sleepz(charNR)
+
+        elif sleepAct == "unprep":
+            gemDataModul.unprepSpell()
+            sleepz(charNR)
+
+        elif sleepAct == "wake":
+            mainMenu(charNR)
+
+        else:
+            sleepz(charNR)
+
+    else:
+        sleepz(charNR)
+
 
 charSel()
