@@ -47,6 +47,7 @@ def mainMenu(charNR):
     charnumber = charNR
     gemDataModul.charnumber = charnumber
     charData = gemDataModul.updateData()
+    gemDataModul.data = charData
 
     print("\nHere you can use/search a spell, sleep, and level up!")
     print(' - To search for a spell, write: "*[spell name]" (use 2 * for more info)')
@@ -64,10 +65,7 @@ def mainMenu(charNR):
         specAct = mAnswer.replace("/","")
 
         if specAct == "sleep":
-            gemDataModul.longRest()
-            gemDataModul.prepSpell()
-            gemDataModul.unprepSpell()
-            mainMenu(charnumber)
+            sleepz(charNR)
 
         elif specAct == "lvlup":
             gemDataModul.lvlup()
@@ -109,5 +107,36 @@ def mainMenu(charNR):
     else:
         print("try again")
         mainMenu(charnumber)
+
+def sleepz(charNR):
+
+    charData = gemDataModul.updateData()
+    gemDataModul.data = charData
+
+    print('\nHere you can prepare and "unprepare" spells')
+    print(' - To prepare a spell, write /prep.')
+    print(' - To "unprepare" a spell, write /unprep.')
+    print(' - To "wake up", write /wake.')
+    sAnswer = input('')
+
+    if sAnswer[0] == "/":
+        sleepAct = sAnswer.replace("/","")
+        if sleepAct == "prep":
+            gemDataModul.prepSpell()
+            sleepz(charNR)
+
+        elif sleepAct == "unprep":
+            gemDataModul.unprepSpell()
+            sleepz(charNR)
+
+        elif sleepAct == "wake":
+            mainMenu(charNR)
+
+        else:
+            sleepz(charNR)
+
+    else:
+        sleepz(charNR)
+
 
 charSel()
