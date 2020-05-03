@@ -45,6 +45,7 @@ def charSel():
 def mainMenu(charNR):
 
     charnumber = charNR
+    gemDataModul.charnumber = charnumber
     charData = gemDataModul.updateData()
 
     print("\nHere you can use/search a spell, sleep, and level up!")
@@ -90,6 +91,7 @@ def mainMenu(charNR):
                 print(e, end=". ")
                 print(int(charData[charnumber].get("maxss").get(e)) - int(charData[charnumber].get("usedss").get(e)), end="/")
                 print(charData[charnumber].get("maxss").get(e))
+            mainMenu(charnumber)
 
         else:
             print("Please write an actual function")

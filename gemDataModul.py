@@ -255,7 +255,7 @@ def deleteCharacter():
 
 
 data = updateData()
-# charnumber = 0
+#charnumber = 0
 #learnSpell("acid Arrow")
 #learnSpell("eldri")
 #lvlup()
