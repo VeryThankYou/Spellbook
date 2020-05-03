@@ -25,7 +25,7 @@ def prepSpell():
         for e in data[charnumber]['prep']:
             if e == spell:
                 #For hvert element i listen over preparerede spells tjekkes om navnet er lig den valgte spell
-                print("You have already prepared this spell")
+                print("You have already prepared this spell\n")
                 count += 1
                 #I det tilfælde får brugeren at vide at de allerede har prepareret spellen, og der lægges 1 til count
         if count == 0:
@@ -38,7 +38,7 @@ def prepSpell():
             print(str(spell) + " has succesfully been prepared\n")
             #Brugeren får at vide at spellen er blevet prepareret
     except:
-        answer = input("Invalid index number. Would you like to try again? (y/n)")
+        answer = input("Invalid index number. Would you like to try again? (y/n)\n")
         #I except-delen får de at vide at der skete en index-fejl, og de bliver spurgt om de vil prøve igen
         if answer == "y":
             prepSpell()
@@ -77,7 +77,7 @@ def learnSpell(string):
             return
             #Funktionen stoppes
     else:
-        print("No results")
+        print("No results\n")
         return
         #Hvis der ikke er nogen resultater for søgningen, får brugeren dette at vide, og funktionen stoppes
     known = 0
@@ -87,7 +87,7 @@ def learnSpell(string):
             known += 1
             #For hver spell man kender, tjekkes om navnet er lig spellname, hvis det er lægges 1 til known
     if known > 0:
-        print("You have learned this spell already.")
+        print("You have learned this spell already.\n")
         #Hvis known er større end 0, får brugeren at vide at de allerede kender spellen
     else:
         data[charnumber]['know'].append(str(spellname))
@@ -100,7 +100,7 @@ def learnSpell(string):
 def lvlup():
     #Her defineres en funktion der tilføjer et level til ens karakter i dataen
     if int(data[charnumber]['lvl']) >= 20:
-        print("You are already at max level")
+        print("You are already at max level\n")
         #Først tjekkes om karakteren er i max lvl. Hvis de er, får de dette at vide
     else:
         data[charnumber]['lvl'] = int(data[charnumber]['lvl']) + 1
@@ -113,7 +113,7 @@ def lvlup():
 def setlvl(i):
     #Her defineres en funktion der sætter karakterens level til et givent tal, nemlig parametret i
     if int(i) < 1 or int(i) > 20:
-        print("Your input has to be within the level range 1-20")
+        print("Your input has to be within the level range 1-20\n")
         #Først tjekkes om i er mellem 1 og 20, da dette er lvl-intervallet i D&D, hvis ikke får brugeren dette at vide
     else:
         data[charnumber]['lvl'] = int(i)
@@ -136,7 +136,7 @@ def longRest():
 def useSpell(i):
     #Her defineres en funktion der sætter tilføjer en brugt spellslot til dictionariet over brugte spellslots. Parametret i bestemmer hvilket lvl spellslot der bruges
     if data[charnumber]['usedss'][str(i)] >= data[charnumber]['maxss'][str(i)]:
-        print("You have expended all spell slots of that level.")
+        print("You have expended all spell slots of that level.\n")
         #Her tjekkes først om der er flere ubrugte spellslots af det valgte lvl
     else:
         data[charnumber]['usedss'][str(i)] = data[charnumber]['usedss'][str(i)] + 1
@@ -226,7 +226,7 @@ def unprepSpell():
             f.close()
             #Her gemmes ændringerne i data.json
     except:
-        answer = input("Invalid index number. Would you like to try again? (y/n)")
+        answer = input("Invalid index number. Would you like to try again? (y/n)\n")
         #Hvis det var et ugyldigt index-nummer får brugeren dette at vide, og der spørges om funktionen skal kaldes igen
         if answer == "y":
             unprepSpell()
@@ -247,15 +247,33 @@ def deleteCharacter():
             f.close()
             #Her gemmes ændringerne i data.json
     except:
-        answer = input("Invalid index number. Would you like to try again? (y/n)")
+        answer = input("Invalid index number. Would you like to try again? (y/n)\n")
         #Hvis det var et ugyldigt index-nummer får brugeren dette at vide, og der spørges om funktionen skal kaldes igen
         if answer == "y":
             deleteCharacter()
             #Hvis brugeren giver inputtet for ja, kaldes funktionen igen
 
+def regenSpellslot():
+    for e in data[charnumber]["maxss"]:
+        print(e, end=". ")
+        print(str(int(data[charnumber]["maxss"][e]) - int(data[charnumber]["usedss"][e])) + "/" + str(data[charnumber]["maxss"][e]) + "\n")
+    inp = input("What level spellslot do you want to regenerate?\n")
+    try:
+        if data[charnumber]["usedss"][str(inp)] > 0:
+            data[charnumber]["usedss"][str(inp)] -= 1
+            with open('data.json', 'w', encoding="utf-8") as f:
+                json.dump(data, f)
+                f.close()
+                #Her gemmes ændringerne i data.json
+        else:
+            print("You don't have a used spellslot of that level\n")
+    except:
+        print("Invalid input\n")
+
+
 
 data = updateData()
-#charnumber = 0
+charnumber = 0
 #learnSpell("acid Arrow")
 #learnSpell("eldri")
 #lvlup()
@@ -267,4 +285,5 @@ data = updateData()
 #updateSpellSlots()
 #learnSpell("delayed blast fire")
 #prepSpell()
+#regenSpellslot()
 #Hernede kaldtes funktioner under udvikling
