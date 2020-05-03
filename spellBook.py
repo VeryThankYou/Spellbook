@@ -46,12 +46,14 @@ def mainMenu(charNR):
 
     charnumber = charNR
     charData = gemDataModul.updateData()
+
     print("\nHere you can use/search a spell, sleep, and level up!")
     print(' - To search for a spell, write: "*[spell name]" (use 2 * for more info)')
     print(' - To use a spell, write: "-[level of used spellslot]"')
     print(' - To sleep, write: "/sleep"')
-    print(' - To view your spellbook, write: "/view"')
+    print(' - To view your spellbook, write: "/book"')
     print(' - To level up, write: "/lvlup"')
+    print(' - To view you spellslots, write: "/slots"')
     print(' - To learn a spell, write: "+[spell name]"')
     mAnswer = input("")
     if mAnswer[0] == "*":
@@ -71,16 +73,23 @@ def mainMenu(charNR):
             gemDataModul.updateSpellSlots()
             mainMenu(charnumber)
 
-        elif specAct == "view":
+        elif specAct == "book":
             cata = input('\nWould you like to view your prepared spells or known spells?\n1. Prepared\n2. Known\n')
             if cata == "1":
-
                 for e in charData[charnumber].get("known"):
                     print(e)
+
             elif cata == "2":
                 for e in charData[charnumber].get("prep"):
                     print(e)
+
             mainMenu(charnumber)
+
+        elif specAct == "slots":
+            for e in charData[charnumber].get("maxss"):
+                print(e, end=". ")
+                print(int(charData[charnumber].get("maxss").get(e)) - int(charData[charnumber].get("usedss").get(e)), end="/")
+                print(charData[charnumber].get("maxss").get(e))
 
         else:
             print("Please write an actual function")

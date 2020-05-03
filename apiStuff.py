@@ -2,10 +2,14 @@ import json
 import requests
 
 def tranScribe(spelStuff, detail = 0):
+    for e in range(20):
+        print("-", end="")
+    print("")
     for e in spelStuff:
         if detail == 0:
             if e == "archetype" or e == "dnd_class" or e == "school" or e == "circles" or e == "page" or e == "slug" or e == "level_int" or e == "document__slug" or e == "document__title" or e == "document__license_url":
                 continue
+
         elif detail == 1:
             if e == "slug" or e == "level_int" or e == "document__slug" or e == "document__title" or e == "document__license_url":
                 continue
@@ -21,6 +25,10 @@ def tranScribe(spelStuff, detail = 0):
             print(" ", end = "")
         print(":    ", end = "")
         print(spelStuff.get(e).capitalize().replace("<br/>",", "))
+
+    for e in range(20):
+        print("-", end="")
+
 
 def findSpell(preDef = "***", detail = 0):
 
