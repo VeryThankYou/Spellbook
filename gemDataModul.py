@@ -298,7 +298,7 @@ charnumber = 0
 #addSpellSlot(3)
 #setSpellSlot(3)
 #updateSpellSlots()
-learnSpell("blas")
-#prepSpell()
+#learnSpell("blas")
+prepSpell()
 #regenSpellslot()
 #Hernede kaldtes funktioner under udvikling
