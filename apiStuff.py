@@ -6,7 +6,7 @@ def tranScribe(spelStuff, detail = 0):
     # Definerer funktion til at printe besværgelser. 1. argument er besværgelsens dictionary. 2. argument til ønsket om meget eller lidt information
     for e in range(20):
         print("-", end="")
-        # For-lykke til at visuel opdeling
+        # For-løkke til at visuel opdeling
     print("")
     # Print til at gå ned på næste linje
     for e in spelStuff:
@@ -15,7 +15,7 @@ def tranScribe(spelStuff, detail = 0):
             # Tjekker om der er ønsket lidt information. Dette er standard
             if e == "archetype" or e == "dnd_class" or e == "school" or e == "circles" or e == "page" or e == "slug" or e == "level_int" or e == "document__slug" or e == "document__title" or e == "document__license_url":
                 continue
-                # Nogle elementer ønsker vi ikke at printe. Disse linje springer videre til næste element i lykken, når de uønskede elementer kommer
+                # Nogle elementer ønsker vi ikke at printe. Disse linje springer videre til næste element i løkken, når de uønskede elementer kommer
 
         elif detail == 1:
             # Tjekker om der er ønsket meget information.
@@ -70,7 +70,7 @@ def findSpell(preDef = "***", detail = 0):
                 num = e+1
                 print(num, end = ". ")
                 print(spelz[e])
-                # For-lykke til at printe alle besværgelser der matchede
+                # For-løkke til at printe alle besværgelser der matchede
 
             ans = int(input(""))
             # Input så brugeren kan vælge hvilken besværgelse de øsnker

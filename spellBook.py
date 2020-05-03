@@ -16,7 +16,7 @@ def charSel():
     # Printer brugerens muligheder
 
     num = 0
-    # Variabel til brug i for-lykke
+    # Variabel til brug i for-løkke
     charData = gemDataModul.updateData()
     # Henter data om alle karaktere
     print("\nCharacters:")
