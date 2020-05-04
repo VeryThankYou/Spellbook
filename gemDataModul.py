@@ -288,7 +288,7 @@ def regenSpellslot():
 
 
 data = updateData()
-charnumber = 0
+# charnumber = 0
 #learnSpell("acid Arrow")
 #learnSpell("eldri")
 #lvlup()
@@ -299,6 +299,6 @@ charnumber = 0
 #setSpellSlot(3)
 #updateSpellSlots()
 #learnSpell("blas")
-prepSpell()
+# prepSpell()
 #regenSpellslot()
 #Hernede kaldtes funktioner under udvikling

@@ -92,14 +92,14 @@ def mainMenu(charNR):
     # Lader brugeren svare
     if mAnswer[0] == "*":
         # Tjekker om det første element i string'en er et *
-        if answer[1] == "*":
+        if mAnswer[1] == "*":
             # Tjekker om det andet element i string'en er et *
             apiStuff.findSpell(mAnswer.replace("*",""), 1)
             mainMenu()
             # Søger efter besværgelse med ønskede mængde af detaljer.
             # Går derefter tilbage til forrige menu.
         else:
-            apiStuff.findSpell(mAswer.replace("*",""), 0)
+            apiStuff.findSpell(mAnswer.replace("*",""), 0)
             mainMenu()
             # Søger efter besværgelse med ønskede mængde af detaljer.
             # Går derefter tilbage til forrige menu.
