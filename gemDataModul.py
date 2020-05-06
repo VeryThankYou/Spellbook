@@ -142,16 +142,19 @@ def longRest():
 
 def useSpell(i):
     #Her defineres en funktion der sætter tilføjer en brugt spellslot til dictionariet over brugte spellslots. Parametret i bestemmer hvilket lvl spellslot der bruges
-    if data[charnumber]['usedss'][str(i)] >= data[charnumber]['maxss'][str(i)]:
-        print("You have expended all spell slots of that level.\n")
-        #Her tjekkes først om der er flere ubrugte spellslots af det valgte lvl
-    else:
-        data[charnumber]['usedss'][str(i)] = data[charnumber]['usedss'][str(i)] + 1
-        #Hvis der er det, tillægges et brugt spellslot af det valgte lvl til dataen
-        with open('data.json', 'w', encoding="utf-8") as f:
-            json.dump(data, f)
-            f.close()
-            #Her gemmes dataen i data.json
+    try:
+        if data[charnumber]['usedss'][str(i)] >= data[charnumber]['maxss'][str(i)]:
+            print("You have expended all spell slots of that level.\n")
+            #Her tjekkes først om der er flere ubrugte spellslots af det valgte lvl
+        else:
+            data[charnumber]['usedss'][str(i)] = data[charnumber]['usedss'][str(i)] + 1
+            #Hvis der er det, tillægges et brugt spellslot af det valgte lvl til dataen
+            with open('data.json', 'w', encoding="utf-8") as f:
+                json.dump(data, f)
+                f.close()
+                #Her gemmes dataen i data.json
+    except:
+        print("Invalid input\n")
 
 def addSpellSlot():
     #Her defineres en funktion der tilføjer et spellslot af et specifikt level
