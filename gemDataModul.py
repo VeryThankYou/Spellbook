@@ -223,10 +223,10 @@ def unprepSpell():
     for e in data[charnumber]['prep']:
         print(str(data[charnumber]['prep'].index(e) + 1) + " - " + str(e) + "\n")
         #Her printen hver spell i listen, sammen med deres indexnummer + 1
-    indx = int(input("Write the index number of the spell you want to remove from your prepared list\n"))
+    indx = input("Write the index number of the spell you want to remove from your prepared list\n")
     #Her giver brugeren et input med det viste indextal på sen spell der skal fjernes
     try:
-        del data[charnumber]['prep'][indx-1]
+        del data[charnumber]['prep'][int(indx)-1]
         #Her prøves at slette elementet i listen med det valgte index-nummer
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
@@ -244,10 +244,10 @@ def deleteCharacter():
     for e in data:
         print(str(data.index(e) + 1) + " - " + str(e['name']) + "\n")
         #Her printen hver karakter i listen, sammen med deres indexnummer + 1
-    indx = int(input("Write the index number of the character you want to delete\n"))
+    indx = input("Write the index number of the character you want to delete\n")
     #Her giver brugeren et input med det viste indextal på den karakter der skal fjernes
     try:
-        del data[indx-1]
+        del data[int(indx)-1]
         #Her prøves at slette elementet i listen med det valgte index-nummer
         with open('data.json', 'w', encoding="utf-8") as f:
             json.dump(data, f)
