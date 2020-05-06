@@ -119,16 +119,19 @@ def lvlup():
 
 def setlvl(i):
     #Her defineres en funktion der sætter karakterens level til et givent tal, nemlig parametret i
-    if int(i) < 1 or int(i) > 20:
-        print("Your input has to be within the level range 1-20\n")
-        #Først tjekkes om i er mellem 1 og 20, da dette er lvl-intervallet i D&D, hvis ikke får brugeren dette at vide
-    else:
-        data[charnumber]['lvl'] = int(i)
-        #Ellers sættes karakterens lvl til i i dataen
-        with open('data.json', 'w', encoding="utf-8") as f:
-            json.dump(data, f)
-            f.close()
-            #Her gemmes ændringerne i data.json
+    try:
+        if int(i) < 1 or int(i) > 20:
+            print("Your input has to be within the level range 1-20\n")
+            #Først tjekkes om i er mellem 1 og 20, da dette er lvl-intervallet i D&D, hvis ikke får brugeren dette at vide
+        else:
+            data[charnumber]['lvl'] = int(i)
+            #Ellers sættes karakterens lvl til i i dataen
+            with open('data.json', 'w', encoding="utf-8") as f:
+                json.dump(data, f)
+                f.close()
+                #Her gemmes ændringerne i data.json
+    except:
+        print("Invalid input")
 
 def longRest():
     #Her defineres funktionen som nulstiller brugerens brugte spellslots
